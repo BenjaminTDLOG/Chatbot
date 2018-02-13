@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var chatService = require('../server/chatService')
 
 // Creates the endpoint for our webhook
 router.post('/', (req, res) => {
@@ -16,6 +17,7 @@ router.post('/', (req, res) => {
       // will only ever contain one message, so we get index 0
       var webhook_event = entry.messaging[0];
       console.log(webhook_event);
+      chatService.sendTextMessage(webhook_event['sender']['id'], 'coucou');
     });
 
     // Returns a '200 OK' response to all requests
